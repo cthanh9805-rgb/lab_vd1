@@ -56,7 +56,7 @@
             </div>
 
             <div class="form-group" style="margin-bottom:18px;">
-                <label for="password" style="display:block; font-size:13px; font-weight:600; color:#cbd5e1; margin-bottom:6px;">Mật khẩu (Tối thiểu 8 ký tự)</label>
+                <label for="password" style="display:block; font-size:13px; font-weight:600; color:#cbd5e1; margin-bottom:6px;">Mật khẩu (Tối thiểu 6 ký tự)</label>
                 <input type="password" name="password" id="password" class="form-control" placeholder="••••••••" required
                        style="width:100%; padding:12px 14px; background:rgba(30,41,59,0.8); border:1px solid rgba(255,255,255,0.12); border-radius:10px; color:#f8fafc; font-size:14px;">
             </div>
