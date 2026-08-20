@@ -157,6 +157,10 @@
         </button>
     </form>
 
+    <div style="text-align:center; margin-top:20px; font-size:13px; color:#94a3b8;">
+        Chưa có tài khoản? <a href="{{ route('register') }}" style="color:#38bdf8; text-decoration:none; font-weight:600;">Đăng ký ngay 🚀</a>
+    </div>
+
     <div class="footer-note">
         &copy; {{ date('Y') }} Heel Admin. Bảo mật 256-bit SSL.
     </div>
