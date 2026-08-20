@@ -182,6 +182,13 @@ class ProductController extends Controller
         return view('products.show', compact('product'));
     }
 
+    // Hướng dẫn Lab 03: Hiển thị sản phẩm cho khách hàng xem
+    public function show_normal(Product $product)
+    {
+        $product->load('category', 'images');
+        return view('products.show_normal', compact('product'));
+    }
+
     public function edit(Product $product)
     {
         $product->load('images');

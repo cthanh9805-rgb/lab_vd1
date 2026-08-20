@@ -306,6 +306,11 @@
 
     <nav class="sidebar-nav">
         <div class="nav-section-label">Menu chính</div>
+        <a href="{{ route('admin.dashboard') }}"
+           class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+            <div class="nav-icon"><i class="fas fa-chart-pie"></i></div>
+            <span>Tổng quan</span>
+        </a>
         <a href="{{ route('categories.index') }}"
            class="nav-item {{ request()->routeIs('categories.*') ? 'active' : '' }}">
             <div class="nav-icon"><i class="fas fa-tags"></i></div>

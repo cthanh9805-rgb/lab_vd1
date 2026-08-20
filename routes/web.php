@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
@@ -10,23 +12,27 @@ use App\Http\Controllers\ActivityLogController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Đường dẫn ứng dụng
+| Web Routes - Hướng dẫn Lab 03: Xác thực & Phân quyền Người Dùng
 |--------------------------------------------------------------------------
 */
 
-// 1. Đăng nhập / Đăng xuất
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+// 1. TRANG CHỦ CỬA HÀNG KHÁCH HÀNG (LAB 03 - SECTION 7)
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/shop/{product}', [ProductController::class, 'show_normal'])->name('products.show_normal');
+
+// 2. XÁC THỰC ĐĂNG KÝ & ĐĂNG NHẬP (LAB 03 - SECTION 1 & 2)
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// 2. Trang chủ
-Route::get('/', function () {
-    return redirect()->route('products.index');
-});
-
-// 3. TOÀN BỘ KHU VỰC ADMIN (Đã bọc Middleware CheckAdmin)
+// 3. TOÀN BỘ KHU VỰC QUẢN TRỊ ADMIN (LAB 03 - SECTION 4 & 11)
 Route::middleware(['admin'])->group(function () {
     
+    // Trang Dashboard Admin (Lab 03 - Section 11)
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
     // Profile cá nhân & Đổi mật khẩu
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
