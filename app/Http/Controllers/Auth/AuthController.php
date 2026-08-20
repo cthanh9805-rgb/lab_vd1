@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
@@ -11,7 +12,6 @@ use Illuminate\Support\Facades\Log;
 
 class AuthController extends Controller
 {
-    // Hướng dẫn Lab 03: Hiển thị Form Đăng Ký
     public function showRegistrationForm()
     {
         if (Auth::check()) {
@@ -22,7 +22,6 @@ class AuthController extends Controller
         return view('auth.register');
     }
 
-    // Hướng dẫn Lab 03: Xử lý Đăng Ký Người Dùng
     public function register(Request $request)
     {
         $request->validate([
@@ -56,7 +55,6 @@ class AuthController extends Controller
         }
     }
 
-    // Hướng dẫn Lab 03: Hiển thị Form Đăng Nhập
     public function showLoginForm()
     {
         if (Auth::check()) {
@@ -67,7 +65,6 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    // Hướng dẫn Lab 03: Xử lý Đăng Nhập
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -80,7 +77,6 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $user = Auth::user();
 
-            // Kiểm tra trạng thái bị khoá
             if ($user->status === 'blocked') {
                 Auth::logout();
                 $request->session()->invalidate();
@@ -90,7 +86,6 @@ class AuthController extends Controller
             $user->update(['last_login_at' => now()]);
             $request->session()->regenerate();
 
-            // Điều hướng theo vai trò (Phân quyền theo Lab 03)
             if ($user->hasAdminAccess()) {
                 ActivityLog::record('login', 'Đăng nhập vào Trang Quản Trị');
                 return redirect()->intended(route('admin.dashboard'))
@@ -107,7 +102,6 @@ class AuthController extends Controller
         ])->onlyInput('email');
     }
 
-    // Hướng dẫn Lab 03: Xử lý Đăng Xuất
     public function logout(Request $request)
     {
         if (Auth::check()) {

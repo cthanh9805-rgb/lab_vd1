@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
-use App\Models\ProductImage;
 use App\Models\Category;
+use App\Models\ProductImage;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 
@@ -186,7 +187,7 @@ class ProductController extends Controller
     public function show_normal(Product $product)
     {
         $product->load('category', 'images');
-        return view('products.show_normal', compact('product'));
+        return view('customer.products.show_normal', compact('product'));
     }
 
     public function edit(Product $product)

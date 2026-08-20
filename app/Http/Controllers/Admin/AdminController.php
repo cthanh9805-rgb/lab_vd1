@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\User;
@@ -10,7 +11,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    // Hướng dẫn Lab 03: Hiển thị trang Admin Dashboard
     public function dashboard()
     {
         $stats = [

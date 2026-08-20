@@ -1,36 +1,42 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WelcomeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\ActivityLogController;
+
+// 1. IMPORT PACAKGE CUSTOMER
+use App\Http\Controllers\Customer\WelcomeController;
+
+// 2. IMPORT PACKAGE AUTH
+use App\Http\Controllers\Auth\AuthController;
+
+// 3. IMPORT PACKAGE ADMIN
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\ActivityLogController;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes - Hướng dẫn Lab 03: Xác thực & Phân quyền Người Dùng
+| Web Routes - Đường Dẫn Ứng Dụng (Đã Phân Chia Theo Package Nền Tảng)
 |--------------------------------------------------------------------------
 */
 
-// 1. TRANG CHỦ CỬA HÀNG KHÁCH HÀNG (LAB 03 - SECTION 7)
+// 🛒 KHU VỰC CỬA HÀNG KHÁCH HÀNG (CUSTOMER PACKAGE)
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/shop/{product}', [ProductController::class, 'show_normal'])->name('products.show_normal');
 
-// 2. XÁC THỰC ĐĂNG KÝ & ĐĂNG NHẬP (LAB 03 - SECTION 1 & 2)
+// 🔑 KHU VỰC XÁC THỰC DÙNG CHUNG (AUTH PACKAGE)
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// 3. TOÀN BỘ KHU VỰC QUẢN TRỊ ADMIN (LAB 03 - SECTION 4 & 11)
+// 👑 KHU VỰC QUẢN TRỊ ADMIN (ADMIN PACKAGE - BỌC MIDDLEWARE ADMIN)
 Route::middleware(['admin'])->group(function () {
     
-    // Trang Dashboard Admin (Lab 03 - Section 11)
+    // Trang Dashboard Admin
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
     // Profile cá nhân & Đổi mật khẩu

@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Customer;
 
+use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    // Hướng dẫn Lab 03: Hiển thị trang chủ cửa hàng dành cho khách hàng
     public function index(Request $request)
     {
         $query = Product::with('category')->latest();
@@ -24,6 +24,6 @@ class WelcomeController extends Controller
         $products = $query->paginate(8)->withQueryString();
         $categories = Category::withCount('products')->get();
 
-        return view('welcome', compact('products', 'categories'));
+        return view('customer.welcome', compact('products', 'categories'));
     }
 }

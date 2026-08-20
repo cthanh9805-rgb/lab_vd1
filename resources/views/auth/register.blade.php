@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('customer.layouts.app')
 
 @section('title', 'Đăng ký tài khoản - MyShop')
 

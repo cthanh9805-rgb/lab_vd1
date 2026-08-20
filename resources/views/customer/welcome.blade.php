@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('customer.layouts.app')
 
 @section('title', 'HEEL BOUTIQUE - Trang Chủ Cửa Hàng')
 
